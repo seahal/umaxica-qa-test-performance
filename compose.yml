@@ -1,4 +1,4 @@
-name: 'jit'
+name: "jit"
 services:
   k6:
     image: grafana/k6:latest

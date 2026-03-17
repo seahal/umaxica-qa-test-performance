@@ -1,6 +1,6 @@
 # umaxica-qa-test-performance
 
-Load testing (k6), security scanning (OWASP ZAP, Nuclei), and frontend performance auditing (Lighthouse) for umaxica.
+Load testing (k6), security scanning (OWASP ZAP, Nuclei, sqlmap, ffuf), TLS auditing (testssl.sh), and frontend performance auditing (Lighthouse) for umaxica.
 
 ## Acknowledgement
 
@@ -8,12 +8,17 @@ This repository is for authorized testing only.
 
 DDoS, request flooding, or any other disruptive testing against systems you do not own or do not have explicit permission to test may result in account termination, service blocking, civil liability, and criminal penalties depending on the jurisdiction.
 
+**LEGAL WARNING:** The tools in this repository can cause serious harm if misused. Running them without explicit written permission from the target owner may violate criminal laws in many countries. You may face prosecution, imprisonment, and fines. Always get authorization first. You are fully responsible for how you use these tools.
+
 ## Structure
 
 ```
 k6/           # k6 load test scripts
 zap/          # OWASP ZAP reports output
 nuclei/       # Nuclei vulnerability scan reports output
+sqlmap/       # sqlmap output (TODO)
+testssl/      # testssl.sh reports output (TODO)
+ffuf/         # ffuf discovery output (TODO)
 lighthouse/   # Lighthouse audit reports output
 compose.yml   # k6, InfluxDB, Grafana, ZAP, Nuclei, Lighthouse
 ```
@@ -46,11 +51,11 @@ Endpoints:
 
 ## OWASP ZAP Security Scanning
 
-| Mode | Description |
-|------|-------------|
+| Mode         | Description                                                             |
+| ------------ | ----------------------------------------------------------------------- |
 | **Baseline** | Passive scan. Headers, cookies, common misconfigs. Safe for production. |
-| **Full** | Passive + active. SQLi, XSS, etc. Only on authorized targets. |
-| **API** | Scans OpenAPI/Swagger definitions. |
+| **Full**     | Passive + active. SQLi, XSS, etc. Only on authorized targets.           |
+| **API**      | Scans OpenAPI/Swagger definitions.                                      |
 
 ```bash
 # Baseline Scan
@@ -98,6 +103,24 @@ docker compose run --rm lighthouse https://umaxica.com/ --output=html,json --out
 ```
 
 Reports are generated in the `lighthouse/` directory.
+
+## sqlmap — SQL Injection Testing (TODO)
+
+Automatic SQL injection detection and exploitation for Rails API endpoints.
+
+Reports will be generated in the `sqlmap/` directory.
+
+## testssl.sh — TLS Configuration Audit (TODO)
+
+Checks TLS/SSL configuration: certificate validity, cipher suites, HSTS, and known vulnerabilities (Heartbleed, POODLE, etc.).
+
+Reports will be generated in the `testssl/` directory.
+
+## ffuf — Hidden Path Discovery (TODO)
+
+Fast web fuzzer for discovering hidden endpoints, directories, and files that may be unintentionally exposed.
+
+Reports will be generated in the `ffuf/` directory.
 
 ## Cleanup
 

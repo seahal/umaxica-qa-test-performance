@@ -12,6 +12,11 @@ compose.yml   # Docker Compose: k6, InfluxDB, Grafana, ZAP, Nuclei, Lighthouse
 
 ## Build, Test, and Development Commands
 
+- `pnpm install` installs project dependencies.
+- `pnpm lint` runs Oxlint via Vite+.
+- `pnpm lint:fix` auto-fixes lint issues.
+- `pnpm check` runs format, lint, and type-check via Vite+.
+- `pnpm fmt` auto-fixes formatting and lint issues.
 - `docker compose up` starts all services.
 - `docker compose up -d influxdb grafana` starts only the backing services.
 - `docker compose run --rm k6 run /k6/sample.js` executes the sample load test.
@@ -25,6 +30,8 @@ Grafana: `localhost:3000` / InfluxDB: `localhost:8086`
 
 ## Coding Style & Naming Conventions
 
+- Formatter/Linter: Vite+ (Oxfmt + Oxlint). Run `pnpm check` before committing.
+- Package manager: pnpm (do not use npm, yarn, or bun).
 - k6 scripts: JavaScript, 2-space indent, semicolons
 - File names: lowercase kebab-case (e.g., `login-loadtest.js`, `checkout-loadtest.js`)
 - Place all k6 scripts in `k6/`

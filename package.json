@@ -1,0 +1,20 @@
+{
+  "name": "umaxica-qa-test-performance",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
+    "check": "vp check",
+    "check:fix": "vp check --fix",
+    "fmt": "vp check --fix"
+  },
+  "devDependencies": {
+    "vite-plus": "^0.1.12"
+  },
+  "packageManager": "pnpm@10.32.1"
+}
