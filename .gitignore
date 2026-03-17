@@ -1,0 +1,30 @@
+# OWASP ZAP reports
+zap/*.html
+zap/*.json
+zap/*.xml
+
+# Nuclei reports
+nuclei/*.txt
+nuclei/*.json
+
+# Lighthouse reports
+lighthouse/*.html
+lighthouse/*.json
+
+# Grafana / InfluxDB local data
+grafana-data/
+influxdb-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Node (if k6 helpers use npm)
+node_modules/

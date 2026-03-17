@@ -3,8 +3,8 @@ services:
   k6:
     image: grafana/k6:latest
     volumes:
-      - ./scripts:/scripts
-    command: run /scripts/loadtest.js
+      - ./k6:/k6
+    command: run /k6/sample.js
     environment:
       - K6_OUT=influxdb=http://influxdb:8086/k6
 
@@ -25,6 +25,32 @@ services:
       - grafana-data:/var/lib/grafana
     depends_on:
       - influxdb
+
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    volumes:
+      - ./zap:/zap/wrk:rw
+    tty: true
+    stdin_open: true
+    user: "zap"
+
+  nuclei:
+    image: projectdiscovery/nuclei:latest
+    volumes:
+      - ./nuclei:/results
+    entrypoint: ["nuclei"]
+    command: ["-u", "https://umaxica.com/", "-o", "/results/report.txt"]
+
+  lighthouse:
+    image: femtopixel/google-lighthouse:latest
+    volumes:
+      - ./lighthouse:/lighthouse
+    entrypoint: ["lighthouse"]
+    command:
+      - "https://umaxica.com/"
+      - "--output=html,json"
+      - "--output-path=/lighthouse/report"
+      - "--chrome-flags=--no-sandbox --headless"
 
 volumes:
   influxdb-data:
